@@ -3,13 +3,27 @@
 @section('title', 'Home')
 
 @section('main-content')
-    <div class="py-4">
-        <ul>
-            @foreach ($movies as $movie)
-                <li>
-                    {{ $movie->id }} - {{ $movie->title }}
-                </li>
-            @endforeach
-        </ul>
+    <div class="row p-5 justify-content-center">
+        @forelse ($movies as $movie)
+            <div class="card col-4 m-2" style="width: 18rem;">
+                {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                <div class="card-body">
+                    <h5 class="card-title">{{ $movie->title }}</h5>
+                    <p class="card-text">Original title:<br> <em>{{ $movie->original_title }}</em></p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Nationality: {{ $movie->nationality }}</li>
+                    <li class="list-group-item">Vote: {{ $movie->vote }}</li>
+                    <li class="list-group-item">Date: {{ $movie->date }}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">More details</a>
+                </div>
+            </div>
+        @empty
+            <div>
+                <h2>There are no movies available. Try later.</h2>
+            </div>
+        @endforelse
     </div>
 @endsection
